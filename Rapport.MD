@@ -1,11 +1,50 @@
 
-placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder 
-placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder
-
+Dockeriser un environnement complet: rapport de travail
+P_Bulles - Nima Zarrabi - CID2A
 
 
 ![Front Page Image](/assets/FrontPageDocker.png "Docker Image")
 
 
-placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder 
-placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder
+J’ai d’abord commencé par le renseigner sur docker et la dockerisation de plusieurs services en même temps.
+J’ai découvert que tout ce faisait dans un fichier docker-compose.yaml.
+J’ai ensuite trouver des exemples de ce genre de fichier afin de les analyser, en voici un exemple :
+
+version: "3.7"
+services:
+  backend:
+    build:
+      context: backend
+      target: development
+    secrets:
+      - db-password
+    depends_on:
+      - db
+  db:
+    image: mariadb
+    restart: always
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent" ]
+      interval: 3s
+      retries: 5
+      start_period: 30s
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=example
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+    expose:
+      - 3306
+  proxy:
+    build: proxy
+    ports:
+      - 8080:80
+    depends_on:
+      - backend
+volumes:
+  db-data:
+secrets:
+  db-password:
+    file: db/password.txt
