@@ -10,7 +10,7 @@ J’ai d’abord commencé par le renseigner sur docker et la dockerisation de p
 J’ai découvert que tout ce faisait dans un fichier docker-compose.yaml.
 J’ai ensuite trouver des exemples de ce genre de fichier afin de les analyser, en voici un exemple :
 
-`
+```
 version: "3.7"
 services:
   backend:
@@ -49,4 +49,4 @@ volumes:
 secrets:
   db-password:
     file: db/password.txt
-`
+```
