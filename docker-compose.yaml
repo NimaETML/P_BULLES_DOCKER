@@ -6,7 +6,7 @@ services:
     secrets:
       - db-password                                       # Set db-password to be a secret
     environment:
-      MYSQL_DATABASE: test_database                       # Set database name
+      MYSQL_DATABASE: placeholder_database                # Set database name
       MYSQL_ROOT_PASSWORD: /run/secrets/db-password       # Set the password that will be used for the root account as db-password, which is in the "secrets" list
       MYSQL_USER: nims                                    # Set database user name
       MYSQL_PASSWORD: pswnims                             # Set database password
