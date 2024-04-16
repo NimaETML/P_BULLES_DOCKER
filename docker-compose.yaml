@@ -17,7 +17,7 @@ services:
 
 # New container "phpmyadmin" for phpmyadmin connection
   phpmyadmin:
-    image: phpmyadmin:5.2.0                                     # Set image to phpmyadmin
+    image: phpmyadmin:5.2.0                               # Set image to phpmyadmin
     restart: always                                       # Docker will always attempt to restart the container if it exits
     environment:
       PMA_ARBITRARY: 1
