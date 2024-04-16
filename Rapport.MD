@@ -4,7 +4,7 @@ placeholder placeholder placeholder placeholder placeholder placeholder placehol
 
 
 
-                            ![Front Page Image](/assets/FrontPageDocker.png "Docker Image")
+![Front Page Image](/assets/FrontPageDocker.png "Docker Image")
 
 
 placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder 
