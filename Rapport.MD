@@ -169,7 +169,7 @@ j'ai finallement compris mon erreur, et j'ai supprimer le volume, qui s'est recr
 
 ## Sources:
 
-```
+
 [Image de couverture](https://spacelift.io/blog/docker-secrets)
 
 [Setup et exemple de compose-dev](https://docs.docker.com/desktop/dev-environments/set-up/)
@@ -185,4 +185,3 @@ j'ai finallement compris mon erreur, et j'ai supprimer le volume, qui s'est recr
 [Example de yaml pour une connexion entre container mariadb et phpmyadmin](https://mytchall.dev/running-mysql-and-phpmyadmin-locally-in-docker/)
 [Aide pour la dockerisation phpmyadmin](https://hub.docker.com/_/phpmyadmin)
 [Aide pour les options du container phpmyadmin](https://hub.docker.com/_/phpmyadmin)
-```

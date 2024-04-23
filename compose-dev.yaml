@@ -1,38 +1,38 @@
-version: "3.7"
 services:
-  backend:
-    build:
-      context: backend          # répértoire dans lequel le dockerfile se trouve
-      target: development       # nom du stage de build duquelle nous voulons "build and run"
-    secrets:
-      - db-password
-    depends_on:
-      - db
+# New container "db" for mariadb database
   db:
-    image: mariadb
-    restart: always
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent" ]
-      interval: 3s
-      retries: 5
-      start_period: 30s
+    image: mariadb:latest                                 # Set image to latest from mariadb
+    restart: always                                       # Docker will always attempt to restart the container if it exits
     secrets:
-      - db-password
-    volumes:
-      - db-data:/var/lib/mysql
+      - db-password                                       # Set db-password to be a secret
     environment:
-      - MYSQL_DATABASE=example
-      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
-    expose:
-      - 3306
-  proxy:
-    build: proxy
+      MYSQL_DATABASE: placeholder_database                # Set database name
+      MYSQL_ROOT_PASSWORD: /run/secrets/db-password       # Set the password that will be used for the root account as db-password, which is in the "secrets" list
+      MYSQL_USER: nims                                    # Set database user name
+      MYSQL_PASSWORD: pswnims                             # Set database password
     ports:
-      - 8080:80
+      - "3306:3306"                                       # Set the ports
+    volumes:
+      - db-data:/var/lib/mysql                            # Set path for storing database data
+
+# New container "phpmyadmin" for phpmyadmin connection
+  phpmyadmin:
+    image: phpmyadmin:5.2.0                               # Set image to phpmyadmin
+    restart: always                                       # Docker will always attempt to restart the container if it exits
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_PORT: 3306
+      PMA_HOST: db                                        # host must be "db" because the database host container name is "db"
+      PMA_USER: nims                                      # Database user must be the same as db MYSQL_USER
+      PMA_PASSWORD: pswnims                               # Database password must be the same as db MYSQL_PASSWORD
+    ports:
+      - "8080:80"                                         # Set the ports
     depends_on:
-      - backend
+      - db                                                # Sets dependentrices; phpmyadmin requires the "db" container to run
+
+# Volume creation and secrets added
 volumes:
-  db-data:
+  db-data:                                                # Create volume "db-data" for persistant storage
 secrets:
   db-password:
-    file: db/password.txt
+    file: db/secret_password.txt                          # Set db-password to be text in the password file
