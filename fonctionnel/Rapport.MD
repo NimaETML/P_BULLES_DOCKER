@@ -1,7 +1,6 @@
-
 # Dockeriser un environnement complet: rapport de travail
-P_Bulles - Nima Zarrabi - CID2A
 
+P_Bulles - Nima Zarrabi - CID2A
 
 ![Front Page Image](/assets/FrontPageDocker.png "Docker Logo")
 
@@ -56,9 +55,7 @@ ce code est disponible depuis https://github.com/dockersamples/compose-dev-env
 
 afin de tester, j'ai pull le repertoire GitHub de l'exemple sur ma machine, puis j'ai lacer la commande "docker-compose up -d" dans le git bash.
 
-
 ![Sample Pulled Image](/assets/docker_compose_up_sample.png "Sample pulled")
-
 
 ![Sample Creation Image](/assets/docker_sample_creation.png "Sample setting up the environement")
 
@@ -106,7 +103,7 @@ services:
     build: proxy
     ports:
       - 80:80
-    depends_on: 
+    depends_on:
       - backend
 
 volumes:
