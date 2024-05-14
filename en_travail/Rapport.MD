@@ -175,7 +175,9 @@ après avoir mis à jour .NET SDK en 8.0.204
 
 problem ici
 
-![I PROBLEM](problem.png)
+![I PROBLEM](assets/problem.png)
+
+problem : Pages de l'aspnetapp copier dans l'image, il faudrais les stocker quelque part d'autre
 
 ## Sources:
 
@@ -195,4 +197,5 @@ problem ici
 [Example de yaml pour une connexion entre container mariadb et phpmyadmin](https://mytchall.dev/running-mysql-and-phpmyadmin-locally-in-docker/)
 [Aide pour la dockerisation phpmyadmin](https://hub.docker.com/_/phpmyadmin)
 [Aide pour les options du container phpmyadmin](https://hub.docker.com/_/phpmyadmin)
+[Aide pour les network entre container](https://docs.docker.com/compose/networking/)
 ```

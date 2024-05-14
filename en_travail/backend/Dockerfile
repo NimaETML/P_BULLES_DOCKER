@@ -1,22 +1,31 @@
-# Learn about building .NET container images:
-# https://github.com/dotnet/dotnet-docker/blob/main/samples/README.md
+# Dockerfile pour application aspnet
+# Crée une variable "build" qui est égale à la platforme cible, dotnet SDK 8.0
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG TARGETARCH
+# Definit l'argument "TARGETARCH" (architecture cible)
+#ARG TARGETARCH
+# Definit le répértoire de travail, c'est dans ce répértoire que toutes les commandes RUN et COPY vont s'éxecuté
 WORKDIR /source
 
-# copy csproj and restore as distinct layers
-COPY /*.csproj .
-RUN dotnet restore -a $TARGETARCH
+# Copie csproj
+COPY aspnetapp/*.csproj .
+# Restore les dépendances et libraries en prenant en compte l'architecture "TARGETARCH" -a $TARGETARCH
+RUN dotnet restore 
 
-# copy and publish app and libraries
-COPY /. .
-RUN dotnet publish -a $TARGETARCH --no-restore -o /app
+# Copie l'application et ses libraries
+COPY aspnetapp/. .
+# Publie l'application et ses libraries en prenant en compte TARGETARCH, sans restorer, et elle se colle dans le répértoire "/app" -a $TARGETARCH
+RUN dotnet publish -c Release -o /app
 
 
-# final stage/image
+# Utilise l'image dotnet aspnet 8.0 de Microsoft
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
-EXPOSE 5000
+# Utilise le port 8080
+EXPOSE 8080
+# Redefinit le répértoire de travail à "/app"
 WORKDIR /app
+# Copie le résultat du build dans le répétoire "/app"
 COPY --from=build /app .
-USER $APP_UID
+# Set the user to the variable "APP_UID" which is an environment variable
+#USER $APP_UID
+# Define the command that is executed when the container starts
 ENTRYPOINT ["./aspnetapp"]

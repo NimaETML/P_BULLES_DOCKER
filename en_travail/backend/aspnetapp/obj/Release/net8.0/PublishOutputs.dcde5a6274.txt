@@ -1,7 +1,0 @@
-C:\Users\pu78ifh\Desktop\P_BULLES_DOCKER\P_BULLES_Docker_DEV_ENV\aspnetapp\published\aspnetapp.exe
-C:\Users\pu78ifh\Desktop\P_BULLES_DOCKER\P_BULLES_Docker_DEV_ENV\aspnetapp\published\appsettings.Development.json
-C:\Users\pu78ifh\Desktop\P_BULLES_DOCKER\P_BULLES_Docker_DEV_ENV\aspnetapp\published\appsettings.json
-C:\Users\pu78ifh\Desktop\P_BULLES_DOCKER\P_BULLES_Docker_DEV_ENV\aspnetapp\published\aspnetapp.dll
-C:\Users\pu78ifh\Desktop\P_BULLES_DOCKER\P_BULLES_Docker_DEV_ENV\aspnetapp\published\aspnetapp.deps.json
-C:\Users\pu78ifh\Desktop\P_BULLES_DOCKER\P_BULLES_Docker_DEV_ENV\aspnetapp\published\aspnetapp.runtimeconfig.json
-C:\Users\pu78ifh\Desktop\P_BULLES_DOCKER\P_BULLES_Docker_DEV_ENV\aspnetapp\published\aspnetapp.pdb
