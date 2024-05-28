@@ -198,4 +198,5 @@ problem : Pages de l'aspnetapp copier dans l'image, il faudrais les stocker quel
 [Aide pour la dockerisation phpmyadmin](https://hub.docker.com/_/phpmyadmin)
 [Aide pour les options du container phpmyadmin](https://hub.docker.com/_/phpmyadmin)
 [Aide pour les network entre container](https://docs.docker.com/compose/networking/)
+[Reference pour le container de tests db](https://github.com/schmunk42/docker-mariadb-example-databases/tree/master)
 ```

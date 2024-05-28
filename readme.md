@@ -18,9 +18,16 @@ port: 8080
 user: nims
 password: pswnims
 
--
+- un compiler pour une application web dotnet-aspnet
+
+se build depuis un dockerfile apart dans:
+backend/Dockerfile
+
+port: 443
 
 - un volume de donnée "db-data"
+
+- un secret db-password
 
 ## marche a suivre:
 
@@ -42,3 +49,5 @@ Container p_bulles_nimzarrabi_docker-db-1 Started
 Container p_bulles_nimzarrabi_docker-phpmyadmin-1 Starting
 Container p_bulles_nimzarrabi_docker-phpmyadmin-1 Started
 ´´´
+
+depuis docker, ou

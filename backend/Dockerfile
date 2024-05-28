@@ -1,5 +1,5 @@
 # Dockerfile pour application aspnet
-# Crée une variable "build" qui est égale à la platforme cible, dotnet SDK 8.0
+# Crée une alias "build" qui est égale à la platforme cible, dotnet SDK 8.0
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 # Definit l'argument "TARGETARCH" (architecture cible)
 #ARG TARGETARCH

@@ -1,0 +1,63 @@
+services:
+  # New container "database" for mariadb database
+  db:
+    image: mariadb:latest # Set image to latest from mariadb
+    restart: always # Docker will always attempt to restart the container if it exits
+
+    secrets:
+      - db-root-password # Set db-root-password to be a secret
+    environment:
+      MARIADB_DATABASE: /run/db/setup_database_db-name.txt # Set database name
+      MARIADB_ROOT_PASSWORD: /run/secrets/db-root-password # Set the password that will be used for the root account as db-root-password, which is in the "secrets" list
+      MARIADB_USER: /run/db/setup_database_user-name.txt # Set database user name
+      MARIADB_PASSWORD: /run/db/setup_database_user-password.txt # Set database password
+    ports:
+      - "3306:3306" # Set the ports
+    volumes:
+      - ./db/setup_database.sql:/docker-entrypoint-initdb.d/setup_database.sql
+      - db-data:/var/lib/mariadb # Set path for storing database data
+
+  # New container "phpmyadmin" for phpmyadmin connection
+  phpmyadmin:
+    image: phpmyadmin:5.2.0 # Set image to phpmyadmin
+    links: # Links this container to:
+      - db # db
+    restart: always # Docker will always attempt to restart the container if it exits
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_PORT: 3306
+      PMA_HOST: db # host must be "db" because the database host container name is "db"
+      PMA_USER: nims # Database user must be the same as db MYSQL_USER
+      PMA_PASSWORD: pswnims # Database password must be the same as db MYSQL_PASSWORD
+    ports:
+      - "8080:80" # Set the ports
+    depends_on:
+      - db # Sets dependentrices; to run, phpmyadmin requires the container "db" to be running
+
+  # New container "dotnet-aspnet"
+  dotnet-aspnet:
+    build: # Built from the file "backend"
+      context: backend
+    ports: # Set the ports
+      - "443:8080"
+
+  db_tests:
+    secrets:
+      - db-root-password # Set db-root-password to be a secret
+    build: # Built from the file "tests/db_test"
+      context: tests/db_test
+      args:
+        MARIADB_DATABASE: /run/db/setup_database_db-name.txt # Set database name
+        MARIADB_ROOT_PASSWORD: /run/secrets/db-root-password # Set the password that will be used for the root account as db-root-password, which is in the "secrets" list
+        MARIADB_USER: /run/db/setup_database_user-name.txt # Set database user name
+        MARIADB_PASSWORD: /run/db/setup_database_user-password.txt # Set database password
+    depends_on:
+      - db # Sets dependentrices; to run, phpmyadmin requires the container "db" to be running
+
+# Volume creation and secrets added
+volumes:
+  db-data: # Create volume "db-data" for persistant storage
+secrets:
+  db-root-password:
+    file: db/setup_database_root-password.txt # Set db-password to be text in the password file
+
